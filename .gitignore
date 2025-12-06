@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# SSL certificates (private)
+*.jks
+*.crt
+*.csr
