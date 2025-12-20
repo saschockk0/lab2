@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # ВОТ ТУТ МЫ ПРОКИДЫВАЕМ ENV ДЛЯ SPRING (application.properties читает ${...})
+    env:
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
@@ -17,12 +22,19 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
           cache: maven
 
+      # === ВОТ ЭТО КЛЮЧЕВО ДЛЯ  TLS/KEYSTORE ===
+      - name: Restore server.jks from GitHub Secrets
+        run: |
+          mkdir -p src/main/resources
+          echo "${{ secrets.KEYSTORE_B64 }}" | base64 --decode > src/main/resources/server.jks
+          ls -l src/main/resources/server.jks
+
+      # Сборка
       - name: Build with Maven (skip tests)
         run: mvn -B clean package -DskipTests
-
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
