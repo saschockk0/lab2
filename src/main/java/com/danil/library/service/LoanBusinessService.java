@@ -49,7 +49,7 @@ public class LoanBusinessService {
         l.setBook(book);
         l.setReader(reader);
         l.setLoanDate(LocalDate.now());
-        l.setDueDate(LocalDate.now().plusDays(14)); // при желании вынеси в настройки
+        l.setDueDate(LocalDate.now().plusDays(14)); //
         l.setReturnDate(null);
 
         l = loanRepository.save(l);
@@ -107,7 +107,7 @@ public class LoanBusinessService {
                 .toList();
     }
 
-    /** Маппинг строго под твой LoanDto */
+    /** Маппинг строго под  LoanDto */
     private LoanDto toDto(Loan l) {
         LoanDto dto = new LoanDto();
         dto.setId(l.getId());

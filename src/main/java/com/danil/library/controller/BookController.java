@@ -59,7 +59,7 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    /* ==== Бизнес-операции над книгами (если у тебя они есть в сервисе) ==== */
+    /* ==== Бизнес-операции над книгами () ==== */
 
     // найти все доступные
     @GetMapping("/available")

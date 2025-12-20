@@ -36,3 +36,13 @@ build/
 *.jks
 *.crt
 *.csr
+
+# ---- secrets / tls ----
+*.jks
+*.p12
+*.pfx
+*.b64
+
+# macOS
+.DS_Store
+**/.DS_Store

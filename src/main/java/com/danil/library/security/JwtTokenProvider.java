@@ -1,95 +1,86 @@
 package com.danil.library.security;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.UUID;
 
-/**
- * Класс, который умеет генерировать и валидировать JWT access / refresh токены.
- */
 @Component
 public class JwtTokenProvider {
 
-    // Секретный ключ (для лабы — просто строка; в реале хранить в настройках/ENV)
-    private static final String SECRET_KEY = "VerySecretJwtKeyForLibraryApp1234567890";
+    private final Key key;
+    private final long accessTtlSeconds;
+    private final long refreshTtlSeconds;
 
-    // Сроки жизни токенов
-    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 15 * 60;      // 15 минут
-    private static final long REFRESH_TOKEN_VALIDITY_SECONDS = 7 * 24 * 60 * 60; // 7 дней
-
-    private final Key signingKey;
-
-    public JwtTokenProvider() {
-        byte[] keyBytes = SECRET_KEY.getBytes(); // можно Base64, но тут хватит и так
-        this.signingKey = Keys.hmacShaKeyFor(keyBytes);
+    public JwtTokenProvider(
+            @Value("${security.jwt.secret}") String secret,
+            @Value("${security.jwt.access-ttl-seconds}") long accessTtlSeconds,
+            @Value("${security.jwt.refresh-ttl-seconds}") long refreshTtlSeconds
+    ) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.accessTtlSeconds = accessTtlSeconds;
+        this.refreshTtlSeconds = refreshTtlSeconds;
     }
 
-    public Instant getAccessTokenExpiryInstant() {
-        return Instant.now().plusSeconds(ACCESS_TOKEN_VALIDITY_SECONDS);
-    }
-
-    public Instant getRefreshTokenExpiryInstant() {
-        return Instant.now().plusSeconds(REFRESH_TOKEN_VALIDITY_SECONDS);
-    }
-
-    public String generateAccessToken(UserDetails userDetails) {
+    public String generateAccessToken(Long userId, String username, String role) {
         Instant now = Instant.now();
-        Instant expiry = getAccessTokenExpiryInstant();
-
-        List<String> roles = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+        Instant exp = now.plusSeconds(accessTtlSeconds);
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
+                .setId(UUID.randomUUID().toString()) // jti
+                .setSubject(username)                // sub
                 .setIssuedAt(Date.from(now))
-                .setExpiration(Date.from(expiry))
-                .claim("roles", roles)
-                .signWith(signingKey, SignatureAlgorithm.HS256)
+                .setExpiration(Date.from(exp))
+                .addClaims(Map.of(
+                        "uid", userId,
+                        "role", role,
+                        "typ", "access"
+                ))
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String generateRefreshToken(UserDetails userDetails) {
+    public RefreshTokenData generateRefreshToken(Long userId, String username, String role) {
         Instant now = Instant.now();
-        Instant expiry = getRefreshTokenExpiryInstant();
+        Instant exp = now.plusSeconds(refreshTtlSeconds);
+        String jti = UUID.randomUUID().toString();
 
-        return Jwts.builder()
-                .setSubject(userDetails.getUsername())
+        String token = Jwts.builder()
+                .setId(jti)
+                .setSubject(username)
                 .setIssuedAt(Date.from(now))
-                .setExpiration(Date.from(expiry))
-                .claim("type", "refresh")
-                .signWith(signingKey, SignatureAlgorithm.HS256)
+                .setExpiration(Date.from(exp))
+                .addClaims(Map.of(
+                        "uid", userId,
+                        "role", role,
+                        "typ", "refresh"
+                ))
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
+
+        return new RefreshTokenData(token, jti, exp);
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(signingKey)
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (JwtException | IllegalArgumentException ex) {
-            return false;
+    public Jws<Claims> parseAndValidate(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+    }
+
+    public void assertTokenType(Claims claims, String expected) {
+        String typ = claims.get("typ", String.class);
+        if (!expected.equals(typ)) {
+            throw new JwtException("Wrong token type: " + typ);
         }
     }
 
-    public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(signingKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.getSubject();
-    }
+    public record RefreshTokenData(String token, String jti, Instant expiresAt) {}
 }

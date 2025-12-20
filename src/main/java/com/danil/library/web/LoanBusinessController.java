@@ -45,5 +45,5 @@ public class LoanBusinessController {
         return loanService.getOverdue();
     }
 
-    // ВАЖНО: НЕТ метода /reader/{readerId} здесь! Он остаётся в LoanController
+    //  метод /reader/{readerId} не здесь Он остаётся в LoanController
 }

@@ -2,47 +2,38 @@ package com.danil.library.controller;
 
 import com.danil.library.dto.LoginRequest;
 import com.danil.library.dto.RefreshRequest;
+import com.danil.library.dto.RegisterRequest;
 import com.danil.library.dto.TokenPairResponse;
-import com.danil.library.security.UserSessionService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.danil.library.security.AuthService;
+import com.danil.library.service.UserAccountService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserSessionService userSessionService;
+    private final UserAccountService userAccountService;
+    private final AuthService authService;
 
-    public AuthController(AuthenticationManager authenticationManager,
-                          UserSessionService userSessionService) {
-        this.authenticationManager = authenticationManager;
-        this.userSessionService = userSessionService;
+    public AuthController(UserAccountService userAccountService, AuthService authService) {
+        this.userAccountService = userAccountService;
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@RequestBody RegisterRequest req) {
+        userAccountService.register(req);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public TokenPairResponse login(@RequestBody LoginRequest request,
-                                   @RequestHeader(value = "User-Agent", required = false) String deviceId) {
-
-        Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
-
-        UserDetails user = (UserDetails) auth.getPrincipal();
-
-        return userSessionService.createSession(user, deviceId);
+    public TokenPairResponse login(@RequestBody LoginRequest req) {
+        return authService.login(req);
     }
 
     @PostMapping("/refresh")
-    public TokenPairResponse refresh(@RequestBody RefreshRequest request,
-                                     @RequestHeader(value = "User-Agent", required = false) String deviceId) {
-
-        return userSessionService.refreshTokens(request.getRefreshToken(), deviceId);
+    public TokenPairResponse refresh(@RequestBody RefreshRequest req) {
+        return authService.refresh(req);
     }
 }
