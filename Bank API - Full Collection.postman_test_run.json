@@ -1,0 +1,1012 @@
+{
+	"id": "521eec0b-b201-4185-b309-6679c27f707f",
+	"name": "Bank API - Full Collection",
+	"timestamp": "2025-12-25T08:50:48.484Z",
+	"collection_id": "50839322-282d59dc-2dd4-4734-98ce-3071bb1a5e39",
+	"folder_id": 0,
+	"environment_id": "50839322-4a91ea6f-84f9-422e-b6b4-290add30aa20",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-12-25T08:50:42.145Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1db154d5-9aea-4f51-ad41-23e2ac2f1682",
+			"name": "Регистрация пользователя",
+			"url": "http://localhost:8080/api/auth/register",
+			"time": 416,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				416
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b897b3b0-9c3f-403d-a519-5c11fa20376a",
+			"name": "Регистрация администратора",
+			"url": "http://localhost:8080/api/auth/register",
+			"time": 80,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				80
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "adc388b1-c471-46b3-ad9f-760aed4500f7",
+			"name": "Вход (Login)",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 130,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				130
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c7665462-6b0c-43da-a6cb-ba67df694b89",
+			"name": "Обновление токена (Refresh)",
+			"url": "http://localhost:8080/api/auth/refresh",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0ad458b1-8e0c-40a1-adf0-64858a3c7066",
+			"name": "Создать клиента 1",
+			"url": "http://localhost:8080/api/customers",
+			"time": 57,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				57
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ef235c71-c9f7-4c18-aac8-4c1d6f73bb9a",
+			"name": "Создать клиента 2",
+			"url": "http://localhost:8080/api/customers",
+			"time": 11,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bd55c922-1322-434b-8100-5251a32baf5e",
+			"name": "Получить всех клиентов",
+			"url": "http://localhost:8080/api/customers",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2f13862d-809e-43cf-bbc8-b10b9b74ee1f",
+			"name": "Получить клиента по ID",
+			"url": "http://localhost:8080/api/customers/1",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ed0e4090-ec89-4764-be48-9fa8e587729c",
+			"name": "Получить клиентов (пагинация)",
+			"url": "http://localhost:8080/api/customers/page?page=0&size=10&sort=id,asc",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				25
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "48174a33-d316-429a-b90f-1e2b26cf988f",
+			"name": "Обновить клиента",
+			"url": "http://localhost:8080/api/customers/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b89ed508-75fe-4d69-8eb4-f47473c2aa5f",
+			"name": "Удалить клиента",
+			"url": "http://localhost:8080/api/customers/2",
+			"time": 14,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6cd4d964-764e-4f5e-b289-4660352878d8",
+			"name": "Создать дебетовый счет",
+			"url": "http://localhost:8080/api/accounts",
+			"time": 19,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "489df5e1-2c85-41eb-9ca5-31b8586e5aaf",
+			"name": "Создать кредитный счет",
+			"url": "http://localhost:8080/api/accounts",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c0d1cbba-eaf7-4c20-9017-fadcd182202e",
+			"name": "Получить все счета",
+			"url": "http://localhost:8080/api/accounts",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4b139ba2-0c82-4d44-b931-6aede458dfb3",
+			"name": "Получить счет по ID",
+			"url": "http://localhost:8080/api/accounts/2",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1af272b2-9eb6-447d-8558-2fea3758055a",
+			"name": "Получить счет по номеру",
+			"url": "http://localhost:8080/api/accounts/number/40702001766641707993",
+			"time": 14,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "08587ddf-0c41-4272-a110-43a7e3cd7a99",
+			"name": "Получить счета клиента",
+			"url": "http://localhost:8080/api/accounts/customer/1",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c24686ee-6a64-4880-aae9-0cc9c39c751c",
+			"name": "Получить счета (пагинация)",
+			"url": "http://localhost:8080/api/accounts/page?page=0&size=10",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "413ca559-e98b-43ea-b415-f9e7c2aa0593",
+			"name": "Заблокировать счет",
+			"url": "http://localhost:8080/api/accounts/1/block",
+			"time": 9,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6b2e2f33-6526-4070-8a6d-b8bc76a9c405",
+			"name": "Разблокировать счет",
+			"url": "http://localhost:8080/api/accounts/1/unblock",
+			"time": 5,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "31db9f64-136d-4c51-9755-7be8fe278876",
+			"name": "Создать карту",
+			"url": "http://localhost:8080/api/cards",
+			"time": 15,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7aae6f2f-d349-41ca-ac4e-0b445860220f",
+			"name": "Создать карту (без даты, будет автоматически)",
+			"url": "http://localhost:8080/api/cards",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fed774f1-c536-4c79-8df7-de317554b207",
+			"name": "Получить все карты",
+			"url": "http://localhost:8080/api/cards",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5ded207e-d9d9-41d3-9396-b4426c91be7b",
+			"name": "Получить карту по ID",
+			"url": "http://localhost:8080/api/cards/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "360d60e5-bf00-4e9d-bd5c-9ebf36270015",
+			"name": "Получить карты по счету",
+			"url": "http://localhost:8080/api/cards/account/1",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "13e3d75e-95ad-4932-a5ab-99ef28855fff",
+			"name": "Заблокировать карту",
+			"url": "http://localhost:8080/api/cards/1/block",
+			"time": 6,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c73773ee-9df2-4e10-9eb9-c1d7ef179c12",
+			"name": "Разблокировать карту",
+			"url": "http://localhost:8080/api/cards/1/unblock",
+			"time": 5,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e7ee07be-32f9-45de-9566-63b7234781c0",
+			"name": "Перевод денег между счетами",
+			"url": "http://localhost:8080/api/transactions",
+			"time": 18,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "51b430b6-a93d-4cc5-86a5-97339a79d22b",
+			"name": "Перевод большой суммы (проверка ошибки)",
+			"url": "http://localhost:8080/api/transactions",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "46db5550-b321-4f45-8fb7-1209a66c5097",
+			"name": "Получить все транзакции",
+			"url": "http://localhost:8080/api/transactions",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8fe9d51a-046a-4cd1-be0e-e6f91e17602f",
+			"name": "Получить транзакцию по ID",
+			"url": "http://localhost:8080/api/transactions/1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e6712896-8aff-4eca-8b3e-632b435d2e03",
+			"name": "Получить транзакции по счету",
+			"url": "http://localhost:8080/api/transactions/account/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "73352aeb-fd47-4441-aadb-c743c074c51b",
+			"name": "Получить неудачные транзакции",
+			"url": "http://localhost:8080/api/transactions/failed",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3db2da9a-068c-4377-b757-fb01eb513f43",
+			"name": "Получить транзакции (пагинация)",
+			"url": "http://localhost:8080/api/transactions/page?page=0&size=10&sort=timestamp,desc",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "63df4612-13bf-43c0-ab67-26fb6af54c5c",
+			"name": "Шаг 1: Регистрация",
+			"url": "http://localhost:8080/api/auth/register",
+			"time": 83,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				83
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ca8895d4-12a0-4540-9f6a-56ca84c932e2",
+			"name": "Шаг 2: Вход",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 84,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				84
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "819f552b-ec8d-4cbb-b207-32ae9f1e99e0",
+			"name": "Шаг 3: Создать клиента 1",
+			"url": "http://localhost:8080/api/customers",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f98b27ee-adc0-4b43-b9b9-3b79548b459b",
+			"name": "Шаг 4: Создать клиента 2",
+			"url": "http://localhost:8080/api/customers",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "134c7d34-e4bb-4755-ba71-c4b8738129a1",
+			"name": "Шаг 5: Создать счет для клиента 1",
+			"url": "http://localhost:8080/api/accounts",
+			"time": 7,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "01769713-5c93-48ac-87aa-1ccb32f4876a",
+			"name": "Шаг 6: Создать счет для клиента 2",
+			"url": "http://localhost:8080/api/accounts",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fb491710-e729-4f0f-9456-9a0b1ca52c13",
+			"name": "Шаг 7: Создать карту для счета 1",
+			"url": "http://localhost:8080/api/cards",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9eb8bed7-70e2-4670-b223-85c0ccf3f86c",
+			"name": "Шаг 8: Посмотреть баланс счета 1 (должен быть 0)",
+			"url": "http://localhost:8080/api/accounts/3",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "49f366d8-7503-4efa-9305-1841ee4163d7",
+			"name": "Шаг 9: Попытка перевода (должна быть ошибка - нет средств)",
+			"url": "http://localhost:8080/api/transactions",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a24c4ea6-10b4-47f2-b741-e40cc2221446",
+			"name": "Шаг 10: Заблокировать и разблокировать карту",
+			"url": "http://localhost:8080/api/cards/3/block",
+			"time": 5,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "05255bff-487d-49d3-8c4d-b444405dedef",
+			"name": "Шаг 11: Посмотреть все транзакции",
+			"url": "http://localhost:8080/api/transactions",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1290,
+	"collection": {
+		"requests": [
+			{
+				"id": "1db154d5-9aea-4f51-ad41-23e2ac2f1682",
+				"method": "POST"
+			},
+			{
+				"id": "b897b3b0-9c3f-403d-a519-5c11fa20376a",
+				"method": "POST"
+			},
+			{
+				"id": "adc388b1-c471-46b3-ad9f-760aed4500f7",
+				"method": "POST"
+			},
+			{
+				"id": "c7665462-6b0c-43da-a6cb-ba67df694b89",
+				"method": "POST"
+			},
+			{
+				"id": "0ad458b1-8e0c-40a1-adf0-64858a3c7066",
+				"method": "POST"
+			},
+			{
+				"id": "ef235c71-c9f7-4c18-aac8-4c1d6f73bb9a",
+				"method": "POST"
+			},
+			{
+				"id": "bd55c922-1322-434b-8100-5251a32baf5e",
+				"method": "GET"
+			},
+			{
+				"id": "2f13862d-809e-43cf-bbc8-b10b9b74ee1f",
+				"method": "GET"
+			},
+			{
+				"id": "ed0e4090-ec89-4764-be48-9fa8e587729c",
+				"method": "GET"
+			},
+			{
+				"id": "48174a33-d316-429a-b90f-1e2b26cf988f",
+				"method": "PUT"
+			},
+			{
+				"id": "b89ed508-75fe-4d69-8eb4-f47473c2aa5f",
+				"method": "DELETE"
+			},
+			{
+				"id": "6cd4d964-764e-4f5e-b289-4660352878d8",
+				"method": "POST"
+			},
+			{
+				"id": "489df5e1-2c85-41eb-9ca5-31b8586e5aaf",
+				"method": "POST"
+			},
+			{
+				"id": "c0d1cbba-eaf7-4c20-9017-fadcd182202e",
+				"method": "GET"
+			},
+			{
+				"id": "4b139ba2-0c82-4d44-b931-6aede458dfb3",
+				"method": "GET"
+			},
+			{
+				"id": "1af272b2-9eb6-447d-8558-2fea3758055a",
+				"method": "GET"
+			},
+			{
+				"id": "08587ddf-0c41-4272-a110-43a7e3cd7a99",
+				"method": "GET"
+			},
+			{
+				"id": "c24686ee-6a64-4880-aae9-0cc9c39c751c",
+				"method": "GET"
+			},
+			{
+				"id": "413ca559-e98b-43ea-b415-f9e7c2aa0593",
+				"method": "PATCH"
+			},
+			{
+				"id": "6b2e2f33-6526-4070-8a6d-b8bc76a9c405",
+				"method": "PATCH"
+			},
+			{
+				"id": "31db9f64-136d-4c51-9755-7be8fe278876",
+				"method": "POST"
+			},
+			{
+				"id": "7aae6f2f-d349-41ca-ac4e-0b445860220f",
+				"method": "POST"
+			},
+			{
+				"id": "fed774f1-c536-4c79-8df7-de317554b207",
+				"method": "GET"
+			},
+			{
+				"id": "5ded207e-d9d9-41d3-9396-b4426c91be7b",
+				"method": "GET"
+			},
+			{
+				"id": "360d60e5-bf00-4e9d-bd5c-9ebf36270015",
+				"method": "GET"
+			},
+			{
+				"id": "13e3d75e-95ad-4932-a5ab-99ef28855fff",
+				"method": "PATCH"
+			},
+			{
+				"id": "c73773ee-9df2-4e10-9eb9-c1d7ef179c12",
+				"method": "PATCH"
+			},
+			{
+				"id": "e7ee07be-32f9-45de-9566-63b7234781c0",
+				"method": "POST"
+			},
+			{
+				"id": "51b430b6-a93d-4cc5-86a5-97339a79d22b",
+				"method": "POST"
+			},
+			{
+				"id": "46db5550-b321-4f45-8fb7-1209a66c5097",
+				"method": "GET"
+			},
+			{
+				"id": "8fe9d51a-046a-4cd1-be0e-e6f91e17602f",
+				"method": "GET"
+			},
+			{
+				"id": "e6712896-8aff-4eca-8b3e-632b435d2e03",
+				"method": "GET"
+			},
+			{
+				"id": "73352aeb-fd47-4441-aadb-c743c074c51b",
+				"method": "GET"
+			},
+			{
+				"id": "3db2da9a-068c-4377-b757-fb01eb513f43",
+				"method": "GET"
+			},
+			{
+				"id": "63df4612-13bf-43c0-ab67-26fb6af54c5c",
+				"method": "POST"
+			},
+			{
+				"id": "ca8895d4-12a0-4540-9f6a-56ca84c932e2",
+				"method": "POST"
+			},
+			{
+				"id": "819f552b-ec8d-4cbb-b207-32ae9f1e99e0",
+				"method": "POST"
+			},
+			{
+				"id": "f98b27ee-adc0-4b43-b9b9-3b79548b459b",
+				"method": "POST"
+			},
+			{
+				"id": "134c7d34-e4bb-4755-ba71-c4b8738129a1",
+				"method": "POST"
+			},
+			{
+				"id": "01769713-5c93-48ac-87aa-1ccb32f4876a",
+				"method": "POST"
+			},
+			{
+				"id": "fb491710-e729-4f0f-9456-9a0b1ca52c13",
+				"method": "POST"
+			},
+			{
+				"id": "9eb8bed7-70e2-4670-b223-85c0ccf3f86c",
+				"method": "GET"
+			},
+			{
+				"id": "49f366d8-7503-4efa-9305-1841ee4163d7",
+				"method": "POST"
+			},
+			{
+				"id": "a24c4ea6-10b4-47f2-b741-e40cc2221446",
+				"method": "PATCH"
+			},
+			{
+				"id": "05255bff-487d-49d3-8c4d-b444405dedef",
+				"method": "GET"
+			}
+		]
+	}
+}
