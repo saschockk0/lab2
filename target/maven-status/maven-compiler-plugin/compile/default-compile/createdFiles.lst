@@ -1,0 +1,7 @@
+com\rus\bank\config\SecurityConfig.class
+com\rus\bank\BankApplication.class
+com\rus\bank\security\JwtTokenProvider$RefreshTokenData.class
+com\rus\bank\security\JwtTokenProvider.class
+com\rus\bank\config\BankProperties$Transaction.class
+com\rus\bank\config\BankProperties.class
+com\rus\bank\config\WebConfig.class
