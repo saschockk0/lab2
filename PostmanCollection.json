@@ -1,0 +1,1002 @@
+{
+  "info": {
+    "name": "Bank API - Full Collection",
+    "description": "Полная коллекция запросов для банковского API: CRUD операции и бизнес-логика",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Аутентификация",
+      "item": [
+        {
+          "name": "Регистрация пользователя",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    console.log('Регистрация успешна');",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"client1\",\n  \"password\": \"password123\",\n  \"role\": \"CLIENT\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Регистрация администратора",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\",\n  \"role\": \"ADMIN\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Вход (Login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('accessToken', jsonData.accessToken);",
+                  "    pm.environment.set('refreshToken', jsonData.refreshToken);",
+                  "    console.log('Токены сохранены');",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"client1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Обновление токена (Refresh)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('accessToken', jsonData.accessToken);",
+                  "    pm.environment.set('refreshToken', jsonData.refreshToken);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "refresh"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Клиенты (Customers) - CRUD",
+      "item": [
+        {
+          "name": "Создать клиента 1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('customerId1', jsonData.id);",
+                  "    console.log('Customer ID 1: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Иван\",\n  \"lastName\": \"Иванов\",\n  \"taxId\": \"1234567890\",\n  \"email\": \"ivan.ivanov@example.com\",\n  \"phone\": \"+79991234567\",\n  \"address\": \"г. Москва, ул. Ленина, д. 1\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers"]
+            }
+          }
+        },
+        {
+          "name": "Создать клиента 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('customerId2', jsonData.id);",
+                  "    console.log('Customer ID 2: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Петр\",\n  \"lastName\": \"Петров\",\n  \"taxId\": \"0987654321\",\n  \"email\": \"petr.petrov@example.com\",\n  \"phone\": \"+79997654321\",\n  \"address\": \"г. Санкт-Петербург, Невский проспект, д. 10\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers"]
+            }
+          }
+        },
+        {
+          "name": "Получить всех клиентов",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers"]
+            }
+          }
+        },
+        {
+          "name": "Получить клиента по ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/{{customerId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers", "{{customerId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить клиентов (пагинация)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/page?page=0&size=10&sort=id,asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers", "page"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "id,asc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Обновить клиента",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Иван\",\n  \"lastName\": \"Иванов-Сидоров\",\n  \"email\": \"ivan.new@example.com\",\n  \"phone\": \"+79991234568\",\n  \"address\": \"г. Москва, ул. Тверская, д. 5\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/{{customerId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers", "{{customerId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Удалить клиента",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/{{customerId2}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers", "{{customerId2}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Счета (Accounts) - CRUD",
+      "item": [
+        {
+          "name": "Создать дебетовый счет",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('accountId1', jsonData.id);",
+                  "    console.log('Account ID 1: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": {{customerId1}},\n  \"currency\": \"RUB\",\n  \"type\": \"DEBIT\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts"]
+            }
+          }
+        },
+        {
+          "name": "Создать кредитный счет",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('accountId2', jsonData.id);",
+                  "    console.log('Account ID 2: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": {{customerId2}},\n  \"currency\": \"RUB\",\n  \"type\": \"CREDIT\",\n  \"creditLimit\": 100000.00\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts"]
+            }
+          }
+        },
+        {
+          "name": "Получить все счета",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts"]
+            }
+          }
+        },
+        {
+          "name": "Получить счет по ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/{{accountId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "{{accountId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить счет по номеру",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/number/40817810099910004321",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "number", "40817810099910004321"]
+            }
+          }
+        },
+        {
+          "name": "Получить счета клиента",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/customer/{{customerId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "customer", "{{customerId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить счета (пагинация)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/page?page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "page"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Заблокировать счет",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/{{accountId1}}/block",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "{{accountId1}}", "block"]
+            }
+          }
+        },
+        {
+          "name": "Разблокировать счет",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/{{accountId1}}/unblock",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "accounts", "{{accountId1}}", "unblock"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Карты (Cards) - CRUD",
+      "item": [
+        {
+          "name": "Создать карту",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('cardId1', jsonData.id);",
+                  "    console.log('Card ID: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": {{accountId1}},\n  \"holderName\": \"IVAN IVANOV\",\n  \"expiryDate\": \"2027-12-31\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cards",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards"]
+            }
+          }
+        },
+        {
+          "name": "Создать карту (без даты, будет автоматически)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": {{accountId2}},\n  \"holderName\": \"PETR PETROV\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cards",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards"]
+            }
+          }
+        },
+        {
+          "name": "Получить все карты",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/cards",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards"]
+            }
+          }
+        },
+        {
+          "name": "Получить карту по ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/cards/{{cardId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards", "{{cardId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить карты по счету",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/cards/account/{{accountId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards", "account", "{{accountId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Заблокировать карту",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/api/cards/{{cardId1}}/block",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards", "{{cardId1}}", "block"]
+            }
+          }
+        },
+        {
+          "name": "Разблокировать карту",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/api/cards/{{cardId1}}/unblock",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards", "{{cardId1}}", "unblock"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Транзакции (Transactions) - Бизнес-операции",
+      "item": [
+        {
+          "name": "Перевод денег между счетами",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('transactionId', jsonData.id);",
+                  "    console.log('Transaction ID: ' + jsonData.id);",
+                  "    console.log('Status: ' + jsonData.status);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromAccountId\": {{accountId1}},\n  \"toAccountId\": {{accountId2}},\n  \"amount\": 5000.00,\n  \"currency\": \"RUB\",\n  \"description\": \"Перевод за услуги\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions"]
+            }
+          }
+        },
+        {
+          "name": "Перевод большой суммы (проверка ошибки)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromAccountId\": {{accountId1}},\n  \"toAccountId\": {{accountId2}},\n  \"amount\": 999999999.00,\n  \"currency\": \"RUB\",\n  \"description\": \"Попытка перевода несуществующих средств\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions"]
+            }
+          }
+        },
+        {
+          "name": "Получить все транзакции",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions"]
+            }
+          }
+        },
+        {
+          "name": "Получить транзакцию по ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions/{{transactionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions", "{{transactionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить транзакции по счету",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions/account/{{accountId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions", "account", "{{accountId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Получить неудачные транзакции",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions/failed",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions", "failed"]
+            }
+          }
+        },
+        {
+          "name": "Получить транзакции (пагинация)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/transactions/page?page=0&size=10&sort=timestamp,desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "transactions", "page"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "timestamp,desc"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Полный сценарий использования",
+      "item": [
+        {
+          "name": "Сценарий: Создание клиентов и перевод денег",
+          "item": [
+            {
+              "name": "Шаг 1: Регистрация",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"scenario_user\",\n  \"password\": \"password123\",\n  \"role\": \"CLIENT\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 2: Вход",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('accessToken', jsonData.accessToken);",
+                      "pm.environment.set('refreshToken', jsonData.refreshToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"scenario_user\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 3: Создать клиента 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('customerId1', jsonData.id);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Алексей\",\n  \"lastName\": \"Смирнов\",\n  \"taxId\": \"1111111111\",\n  \"email\": \"alex@example.com\",\n  \"phone\": \"+79991111111\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/customers",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "customers"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 4: Создать клиента 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('customerId2', jsonData.id);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Мария\",\n  \"lastName\": \"Козлова\",\n  \"taxId\": \"2222222222\",\n  \"email\": \"maria@example.com\",\n  \"phone\": \"+79992222222\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/customers",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "customers"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 5: Создать счет для клиента 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('accountId1', jsonData.id);",
+                      "console.log('Счет создан: ' + jsonData.accountNumber);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": {{customerId1}},\n  \"currency\": \"RUB\",\n  \"type\": \"DEBIT\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/accounts",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "accounts"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 6: Создать счет для клиента 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('accountId2', jsonData.id);",
+                      "console.log('Счет создан: ' + jsonData.accountNumber);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": {{customerId2}},\n  \"currency\": \"RUB\",\n  \"type\": \"DEBIT\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/accounts",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "accounts"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 7: Создать карту для счета 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.environment.set('cardId1', jsonData.id);",
+                      "console.log('Карта создана: ' + jsonData.cardNumber);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountId\": {{accountId1}},\n  \"holderName\": \"ALEXEY SMIRNOV\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cards",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "cards"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 8: Посмотреть баланс счета 1 (должен быть 0)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/accounts/{{accountId1}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "accounts", "{{accountId1}}"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 9: Попытка перевода (должна быть ошибка - нет средств)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fromAccountId\": {{accountId1}},\n  \"toAccountId\": {{accountId2}},\n  \"amount\": 1000.00,\n  \"currency\": \"RUB\",\n  \"description\": \"Попытка перевода без средств\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transactions",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "transactions"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 10: Заблокировать и разблокировать карту",
+              "request": {
+                "method": "PATCH",
+                "url": {
+                  "raw": "{{baseUrl}}/api/cards/{{cardId1}}/block",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "cards", "{{cardId1}}", "block"]
+                }
+              }
+            },
+            {
+              "name": "Шаг 11: Посмотреть все транзакции",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/transactions",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "transactions"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "Bank API Environment",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "customerId1",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "customerId2",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "accountId1",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "accountId2",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "cardId1",
+      "value": "",
+      "type": "default",]
+      "enabled": true
+    },
+    {
+      "key": "transactionId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

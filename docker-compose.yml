@@ -3,18 +3,18 @@ version: "3.9"
 services:
   db:
     image: postgres:16
-    container_name: library-postgres
+    container_name: bank-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: library
-      POSTGRES_USER: library
-      POSTGRES_PASSWORD: library
+      POSTGRES_DB: bank
+      POSTGRES_USER: bank
+      POSTGRES_PASSWORD: bank
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U library -d library"]
+      test: ["CMD-SHELL", "pg_isready -U bank -d bank"]
       interval: 5s
       timeout: 3s
       retries: 30
