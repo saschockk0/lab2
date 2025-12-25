@@ -101,3 +101,4 @@ values ('client', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iwK8pDN6'
 on conflict (username) do nothing;
 
 
+
