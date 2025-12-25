@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.rus</groupId>
-    <artifactId>laba2-rbpo</artifactId>
+    <artifactId>LabBankApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bank-api</name>
     <description>Bank Management API with JWT security</description>
